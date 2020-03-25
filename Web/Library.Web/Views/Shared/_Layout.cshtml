@@ -9,6 +9,8 @@
     <environment names="Development">
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/css/slick.css" rel="stylesheet" asp-append-version="true">
     </environment>
     <environment names="Staging,Production">
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
@@ -68,6 +70,10 @@
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/js/slick.min.js" asp-append-version="true"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+
     </environment>
 
     @this.RenderSection("Scripts", required: false)

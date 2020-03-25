@@ -8,6 +8,7 @@ namespace Library.Web.ViewModels.Books
 {
     public class BookViewModel : IMapFrom<Book>
     {
+        public int Id { get; set; }
         public string ImgUrl { get; set; }
 
         public string Title { get; set; }

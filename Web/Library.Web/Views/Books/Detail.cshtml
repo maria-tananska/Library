@@ -1,0 +1,12 @@
+﻿@model Library.Web.ViewModels.Books.BookDetailViewModel
+
+    <div class="single-blog">
+        <div class="single-blog__img">
+            <img src="@Model.ImgUrl" alt="blog image">
+        </div>
+        <div class="single-blog__text">
+            <h4>@Model.Title</h4>
+            <span>On August 28, 2015</span>
+            <p>@Model.ShortContent</p>
+        </div>
+    </div>

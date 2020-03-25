@@ -22,5 +22,12 @@
 
             return this.View(books);
         }
+
+        public IActionResult Detail(int id)
+        {
+            var book = this.bookService.GetById<BookDetailViewModel>(id);
+
+            return this.View(book);
+        }
     }
 }
