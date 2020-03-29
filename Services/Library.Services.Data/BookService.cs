@@ -40,7 +40,7 @@
         public IEnumerable<T> All<T>()
         {
             var books = this.bookRepository.All()
-                .To<T>();
+                .To<T>().ToList();
 
             return books;
         }

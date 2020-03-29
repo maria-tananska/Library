@@ -36,7 +36,17 @@
         {
             var favoriteBooks = this.favoriteRepository.All()
                 .Where(f => f.UserId == userId)
-                .To<T>().ToList();
+                .To<T>()
+                .ToList();
+            //    .Select(f => f.Book);
+
+            //var favoriteBooks = books
+            //    .Select(b => new
+            //    {
+            //        BookId = b.Id,
+            //        BookTitle=b.Title,
+            //        BookImgUrl = b.ImgUrl,
+            //    }).ToList();
 
             return favoriteBooks;
         }

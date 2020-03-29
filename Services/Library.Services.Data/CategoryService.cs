@@ -1,10 +1,10 @@
 ﻿namespace Library.Services.Data
 {
-    using Library.Data.Common.Repositories;
-    using Library.Data.Models;
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using Library.Data.Common.Repositories;
+    using Library.Data.Models;
 
     public class CategoryService : ICategoryService
     {
@@ -28,7 +28,7 @@
             return category.Id;
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)s
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             var category = this.categoryRepository.All()
                 .Where(c => c.Id == id);
