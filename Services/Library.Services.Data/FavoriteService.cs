@@ -18,18 +18,22 @@
             this.favoriteRepository = favoriteRepository;
         }
 
-        public async Task<int> AddToFavoriteAsync(string userId, int bookId)
+        public async Task AddToFavoriteAsync(string userId, int bookId)
         {
-            var favorite = new Favorite
+            var isAdded = this.favoriteRepository.All()
+                .Any(f => f.UserId == userId && f.BookId == bookId);
+
+            if (isAdded == false)
             {
-                UserId = userId,
-                BookId = bookId,
-            };
+                var favorite = new Favorite
+                {
+                    UserId = userId,
+                    BookId = bookId,
+                };
 
-            await this.favoriteRepository.AddAsync(favorite);
-            await this.favoriteRepository.SaveChangesAsync();
-
-            return favorite.Id;
+                await this.favoriteRepository.AddAsync(favorite);
+                await this.favoriteRepository.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<T> FavoriteBook<T>(string userId)
@@ -38,15 +42,6 @@
                 .Where(f => f.UserId == userId)
                 .To<T>()
                 .ToList();
-            //    .Select(f => f.Book);
-
-            //var favoriteBooks = books
-            //    .Select(b => new
-            //    {
-            //        BookId = b.Id,
-            //        BookTitle=b.Title,
-            //        BookImgUrl = b.ImgUrl,
-            //    }).ToList();
 
             return favoriteBooks;
         }
