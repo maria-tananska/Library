@@ -1,0 +1,32 @@
+﻿@model Library.Web.ViewModels.Admin.Categories.AllCategoriesViewModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>@ViewData["Title"]</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Comands</th>
+        </tr>
+    </thead>
+    @foreach (var category in Model.Categories)
+    {
+
+        <tbody>
+            <tr>
+                <th scope="row">@category.Id</th>
+                <td>@category.Name</td>
+                <td>
+                    <a href="/Admin/Categories/Create" class="btn btn-success">Create</a>
+                    <a href="/Admin/Categories/Edit/@category.Id" class="btn btn-warning">Edit</a>
+                    <a href="/Admin/Categories/Delete/@category.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+
+    }
+</table>
+

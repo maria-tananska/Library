@@ -1,0 +1,33 @@
+﻿@model Library.Web.ViewModels.Admin.Books.AllBooksViewModel
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Comands</th>
+        </tr>
+    </thead>
+    @foreach (var book in Model.Books)
+    {
+
+        <tbody>
+            <tr>
+                <th scope="row">@book.Id</th>
+                <td>@book.Title</td>
+                <td>
+                    <a href="/Admin/Books/Create" class="btn btn-success">Create</a>
+                    <a href="/Admin/Books/Edit/@book.Id" class="btn btn-warning">Edit</a>
+                    <a href="/Admin/Books/Delete/@book.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+
+    }
+</table>
+

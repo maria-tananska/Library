@@ -1,0 +1,23 @@
+﻿
+@model Library.Web.ViewModels.Admin.Author.EditViewModel
+
+@{
+    ViewData["Title"] = "Edit Author";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Edit" asp-controller="Author" method="post">
+    <div>
+        <label asp-for="FirstName">First Name</label>
+        <input asp-for="FirstName" value="@Model.FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="LastName">Last Name</label>
+        <input asp-for="LastName" value="@Model.LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <hr />
+    <input type="submit" class="btn btn-primary" value="Edit" />
+</form>
+

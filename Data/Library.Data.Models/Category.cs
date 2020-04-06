@@ -12,6 +12,8 @@
 
         public string Name { get; set; }
 
+        public string Img { get; set; }
+
         public virtual ICollection<Book> Books { get; set; }
     }
 }

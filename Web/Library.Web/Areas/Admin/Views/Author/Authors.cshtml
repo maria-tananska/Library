@@ -1,0 +1,33 @@
+﻿@model Library.Web.ViewModels.Admin.Author.AllAuthorViewModel
+@{
+    ViewData["Title"] = "Authors";
+}
+
+<h1>Authors</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Comands</th>
+        </tr>
+    </thead>
+    @foreach (var author in Model.Authors)
+    {
+
+        <tbody>
+            <tr>
+                <th scope="row">@author.Id</th>
+                <td>@author.FirstName @author.LastName</td>
+                <td>
+                    <a href="/Admin/Author/Create" class="btn btn-success">Create</a>
+                    <a href="/Admin/Author/Edit/@author.Id" class="btn btn-warning">Edit</a>
+                    <a href="/Admin/Author/Delete/@author.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+
+    }
+</table>
+

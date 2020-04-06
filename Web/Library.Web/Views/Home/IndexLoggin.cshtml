@@ -1,0 +1,19 @@
+﻿@model Library.Web.ViewModels.Home.IndexViewModel
+@{
+    ViewData["Title"] = "My books";
+}
+
+ <h1>My books</h1>
+
+@foreach (var book in Model.FavouriteBook)
+{
+    <div class="card" style="width: 18rem;">
+        <img src="@book.BookImgUrl" class="card-img-top" alt="@book.BookTitle">
+        <div class="card-body">
+            <h5 class="card-title">@book.BookTitle</h5>
+            <div>@book.BookAutorFirstName @book.BookAutorLastName</div>
+            <a href="/Books/Detail/@book.BookId" class="btn btn-primary align-content-center">Read</a>
+        </div>
+    </div>
+}
+

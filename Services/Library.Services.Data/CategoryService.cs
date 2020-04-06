@@ -1,10 +1,12 @@
 ﻿namespace Library.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Library.Data.Common.Repositories;
     using Library.Data.Models;
+    using Library.Services.Mapping;
 
     public class CategoryService : ICategoryService
     {
@@ -37,6 +39,15 @@
             var result = await this.categoryRepository.SaveChangesAsync();
 
             return result > 0;
+        }
+
+        public IEnumerable<T> GetAllCategories<T>()
+        {
+            var categories = this.categoryRepository.All()
+                .To<T>()
+                .ToList();
+
+            return categories;
         }
     }
 }
