@@ -1,0 +1,21 @@
+﻿@model Library.Web.ViewModels.Admin.Categories.CreateViewModel
+@{
+    ViewData["Title"] = "Create category";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Create" asp-controller="Categories" method="post">
+    <div>
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Img">Image Url</label>
+        <input asp-for="Img" class="form-control" />
+        <span asp-validation-for="Img" class="text-danger"></span>
+    </div>
+    <hr />
+    <input type="submit" class="btn btn-primary" value="Create" />
+</form>
+

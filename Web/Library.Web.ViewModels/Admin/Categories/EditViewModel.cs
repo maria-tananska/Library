@@ -2,8 +2,13 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateViewModel
+    using Library.Data.Models;
+    using Library.Services.Mapping;
+
+    public class EditViewModel : IMapFrom<Category>
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(3)]
         public string Name { get; set; }

@@ -45,6 +45,19 @@
             return books;
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
+
+            if (book == null)
+            {
+                throw new ArgumentException($"Book with id {id} don't exist");
+            }
+
+            book.IsDeleted = true;
+            await this.bookRepository.SaveChangesAsync();
+        }
+
         public T GetById<T>(int id)
         {
             var book = this.bookRepository.All()

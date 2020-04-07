@@ -10,5 +10,7 @@
         Task<int> AddAsync(string title, string shortContent, string imgUrl, string fileName, int pages, int categoryId, int authorId);
 
         T GetById<T>(int id);
+
+        Task DeleteAsync(int id);
     }
 }

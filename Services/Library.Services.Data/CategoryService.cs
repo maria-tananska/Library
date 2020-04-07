@@ -1,5 +1,6 @@
 ﻿namespace Library.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -17,11 +18,12 @@
             this.categoryRepository = categoryRepository;
         }
 
-        public async Task<int> CreateAsync(string name)
+        public async Task<int> CreateAsync(string name, string img)
         {
             var category = new Category
             {
                 Name = name,
+                Img = img,
             };
 
             await this.categoryRepository.AddAsync(category);
@@ -30,15 +32,27 @@
             return category.Id;
         }
 
-        public async Task<bool> DeleteByIdAsync(int id)
+        public async Task DeleteByIdAsync(int id)
         {
-            var category = this.categoryRepository.All()
-                .Where(c => c.Id == id);
+            var category = await this.categoryRepository.GetByIdWithDeletedAsync(id);
+            //this.categoryRepository.Delete(category);
+            category.IsDeleted = true;
+            await this.categoryRepository.SaveChangesAsync();
+        }
 
-            await this.categoryRepository.GetByIdWithDeletedAsync(category);
-            var result = await this.categoryRepository.SaveChangesAsync();
+        public async Task EditAsync(int id, string name, string img)
+        {
+            var category = await this.categoryRepository.GetByIdWithDeletedAsync(id);
 
-            return result > 0;
+            if (category == null)
+            {
+                throw new ArgumentException($"Category with id {id} don't exist!");
+            }
+
+            category.Name = name;
+            category.Img = img;
+
+            await this.categoryRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> GetAllCategories<T>()
@@ -48,6 +62,21 @@
                 .ToList();
 
             return categories;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var category = this.categoryRepository.All()
+                .Where(c => c.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            if (category == null)
+            {
+                throw new ArgumentException($"Category with id {id} don't exist!");
+            }
+
+            return category;
         }
     }
 }

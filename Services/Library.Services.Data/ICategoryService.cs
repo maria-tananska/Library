@@ -5,10 +5,14 @@
 
     public interface ICategoryService
     {
-       Task<int> CreateAsync(string name);
+        Task<int> CreateAsync(string name, string img);
 
-       Task<bool> DeleteByIdAsync(int id);
+        Task DeleteByIdAsync(int id);
 
-       IEnumerable<T> GetAllCategories<T>();
+        IEnumerable<T> GetAllCategories<T>();
+
+        T GetById<T>(int id);
+
+        Task EditAsync(int id, string name, string img);
     }
 }
