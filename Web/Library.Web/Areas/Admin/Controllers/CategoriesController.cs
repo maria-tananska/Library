@@ -1,18 +1,22 @@
 ﻿namespace Library.Web.Areas.Admin.Controllers
 {
+    using System.Threading.Tasks;
+    using Library.Common;
+    using Library.Services;
     using Library.Services.Data;
     using Library.Web.ViewModels.Admin.Categories;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     [Area("Admin")]
     public class CategoriesController : Controller
     {
         private readonly ICategoryService categoryService;
+        private readonly ICloudinaryService cloudinaryService;
 
-        public CategoriesController(ICategoryService categoryService)
+        public CategoriesController(ICategoryService categoryService, ICloudinaryService cloudinaryService)
         {
             this.categoryService = categoryService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public IActionResult All()
@@ -39,7 +43,12 @@
                 return this.View(input);
             }
 
-            await this.categoryService.CreateAsync(input.Name, input.Img);
+            var imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+            input.Img,
+            $"{input.Name}",
+            GlobalConstants.CloudFolderForCategories);
+
+            await this.categoryService.CreateAsync(input.Name, imgUrl);
 
             return this.RedirectToAction(nameof(this.All));
         }

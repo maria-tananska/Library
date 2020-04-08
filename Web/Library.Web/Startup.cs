@@ -1,13 +1,14 @@
 ﻿namespace Library.Web
 {
     using System.Reflection;
-
+    using CloudinaryDotNet;
     using Library.Data;
     using Library.Data.Common;
     using Library.Data.Common.Repositories;
     using Library.Data.Models;
     using Library.Data.Repositories;
     using Library.Data.Seeding;
+    using Library.Services;
     using Library.Services.Data;
     using Library.Services.Mapping;
     using Library.Services.Messaging;
@@ -23,18 +24,18 @@
 
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration Configuration;
 
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            this.Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -49,7 +50,7 @@
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddSingleton(this.configuration);
+            services.AddSingleton(this.Configuration);
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -63,6 +64,17 @@
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IAuthorService, AuthorService>();
             services.AddTransient<IFavoriteService, FavoriteService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+
+            // Cloudinary
+            Account account = new Account(
+                this.Configuration["Cloudinary:AppName"],
+                this.Configuration["Cloudinary:AppKey"],
+                this.Configuration["Cloudinary:AppSecret"]);
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

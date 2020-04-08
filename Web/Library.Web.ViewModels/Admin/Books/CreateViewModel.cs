@@ -3,9 +3,10 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
-
+    using System.ComponentModel.DataAnnotations;
     using Library.Data.Models;
     using Library.Services.Mapping;
+    using Microsoft.AspNetCore.Http;
 
     public class CreateViewModel : IMapTo<Book>
     {
@@ -13,7 +14,8 @@
 
         public string ShortContent { get; set; }
 
-        public string ImgUrl { get; set; }
+        [Required]
+        public IFormFile Img { get; set; }
 
         public string FileName { get; set; }
 

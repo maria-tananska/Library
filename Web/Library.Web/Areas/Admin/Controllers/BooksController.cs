@@ -1,5 +1,7 @@
 ﻿namespace Library.Web.Areas.Admin.Controllers
 {
+    using Library.Common;
+    using Library.Services;
     using Library.Services.Data;
     using Library.Web.ViewModels.Admin.Books;
     using Microsoft.AspNetCore.Mvc;
@@ -11,12 +13,18 @@
         private readonly IBookService bookService;
         private readonly ICategoryService categoryService;
         private readonly IAuthorService authorService;
+        private readonly ICloudinaryService cloudinaryService;
 
-        public BooksController(IBookService bookService, ICategoryService categoryService, IAuthorService authorService)
+        public BooksController(
+            IBookService bookService,
+            ICategoryService categoryService,
+            IAuthorService authorService,
+            ICloudinaryService cloudinaryService)
         {
             this.bookService = bookService;
             this.categoryService = categoryService;
             this.authorService = authorService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public IActionResult All()
@@ -54,8 +62,13 @@
                 return this.View(input);
             }
 
+            var imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+                input.Img,
+                $"{input.Title}",
+                GlobalConstants.CloudFolderForBooks);
+
             await this.bookService
-                .AddAsync(input.Title, input.ShortContent, input.ImgUrl, input.FileName, input.Pages, input.CategoryId, input.AutorId);
+                .AddAsync(input.Title, input.ShortContent, imgUrl, input.FileName, input.Pages, input.CategoryId, input.AutorId);
 
             return this.RedirectToAction(nameof(this.All));
         }

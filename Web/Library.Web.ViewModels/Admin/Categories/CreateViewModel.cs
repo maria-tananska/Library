@@ -2,6 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using Microsoft.AspNetCore.Http;
+
     public class CreateViewModel
     {
         [Required]
@@ -9,6 +11,6 @@
         public string Name { get; set; }
 
         [Required]
-        public string Img { get; set; }
+        public IFormFile Img { get; set; }
     }
 }

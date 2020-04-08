@@ -4,15 +4,17 @@
 }
 
 <h1>@ViewData["Title"]</h1>
-<form asp-action="Create" asp-controller="Categories" method="post">
+<form asp-action="Create" asp-controller="Categories" method="post" enctype="multipart/form-data">
     <div>
         <label asp-for="Name">Name</label>
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="Img">Image Url</label>
-        <input asp-for="Img" class="form-control" />
+    <div class="form-group">
+        <label asp-for="Img" class="upload-btn">
+            <i class="fa fa-upload"></i> Upload
+            <input asp-for="Img" type="file" class="form-control" />
+        </label>
         <span asp-validation-for="Img" class="text-danger"></span>
     </div>
     <hr />
