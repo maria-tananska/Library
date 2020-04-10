@@ -5,6 +5,8 @@
 
     public class BookDetailViewModel : IMapFrom<Book>
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string ShortContent { get; set; }

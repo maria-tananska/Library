@@ -4,6 +4,7 @@
 
     using Library.Data.Models;
     using Library.Services.Mapping;
+    using Microsoft.AspNetCore.Http;
 
     public class EditViewModel : IMapFrom<Category>
     {
@@ -14,6 +15,6 @@
         public string Name { get; set; }
 
         [Required]
-        public string Img { get; set; }
+        public IFormFile ImgUrl { get; set; }
     }
 }

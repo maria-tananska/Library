@@ -3,17 +3,19 @@
     ViewData["Title"] = "My books";
 }
 
- <h1>My books</h1>
+<h1>My books</h1>
+<div class="books">
+    @foreach (var book in Model.FavouriteBook)
+    {
+        <div class="single-book">
+            <a href="/Books/Detail/@book.BookId" class="single-book__img">
+                <img src="@book.BookImgUrl" width="100" alt="@book.BookTitle image">
+            </a>
+            <h4 class="single-book__title">@book.BookTitle</h4>
+            <span class="single-book__price">@book.BookAutorFirstName @book.BookAutorLastName</span>
 
-@foreach (var book in Model.FavouriteBook)
-{
-    <div class="card" style="width: 18rem;">
-        <img src="@book.BookImgUrl" class="card-img-top" alt="@book.BookTitle">
-        <div class="card-body">
-            <h5 class="card-title">@book.BookTitle</h5>
-            <div>@book.BookAutorFirstName @book.BookAutorLastName</div>
-            <a href="/Books/Detail/@book.BookId" class="btn btn-primary align-content-center">Read</a>
         </div>
-    </div>
-}
+
+    }
+</div>
 

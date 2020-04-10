@@ -1,14 +1,17 @@
 ﻿namespace Library.Web.Controllers
 {
+    using Library.Data.Models;
     using Library.Services.Data;
     using Library.Web.ViewModels.Books;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class BooksController : BaseController
     {
         private readonly IBookService bookService;
 
-        public BooksController(IBookService bookService)
+        public BooksController(
+            IBookService bookService)
         {
             this.bookService = bookService;
         }

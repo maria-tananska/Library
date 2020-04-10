@@ -1,30 +1,25 @@
 ﻿@model Library.Web.ViewModels.Books.AllBookViewModel
 
 <h1>All Book</h1>
-
-<section class="fh5co-books">
-    <div class="site-container">
-        @foreach (var book in Model.Books)
-            {
-                <div class="books">
-                    <div class="single-book">
-                        <a href="/Books/Detail/@book.Id" class="single-book__img">
-                            <img src="@book.ImgUrl" alt="book img">
-                        </a>
-                        <h4 class="single-book__title">@book.Title</h4>
-                        <span class="single-book__price">@book.AutorFirstName @book.AutorLastName</span>
-                        <!-- star rating -->
-                        <div class="rating">
-                            <span>&#9734;</span>
-                            <span>&#9734;</span>
-                            <span>&#9734;</span>
-                            <span>&#9734;</span>
-                            <span>&#9734;</span>
-                        </div>
-                        <!-- star rating end -->
-                    </div>
-                </div>
-            }
-    </div>
-</section>
+<div class="books">
+    @foreach (var book in Model.Books)
+    {
+        <div class="single-book">
+            <a href="/Books/Detail/@book.Id" class="single-book__img">
+                <img src="@book.ImgUrl" width="100" alt="@book.Title image">
+            </a>
+            <h4 class="single-book__title">@book.Title</h4>
+            <span class="single-book__price">@book.AutorFirstName @book.AutorLastName</span>
+            <!-- star rating -->
+            <div class="rating">
+                <span>&#9734;</span>
+                <span>&#9734;</span>
+                <span>&#9734;</span>
+                <span>&#9734;</span>
+                <span>&#9734;</span>
+            </div>
+            <!-- star rating end -->
+        </div>
+    }
+</div>
 

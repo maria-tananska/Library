@@ -23,17 +23,19 @@
             var isAdded = this.favoriteRepository.All()
                 .Any(f => f.UserId == userId && f.BookId == bookId);
 
-            if (isAdded == false)
+            if (isAdded)
             {
-                var favorite = new Favorite
-                {
-                    UserId = userId,
-                    BookId = bookId,
-                };
-
-                await this.favoriteRepository.AddAsync(favorite);
-                await this.favoriteRepository.SaveChangesAsync();
+                throw new ArgumentException("This book is added to favorite");
             }
+
+            var favorite = new Favorite
+            {
+                UserId = userId,
+                BookId = bookId,
+            };
+
+            await this.favoriteRepository.AddAsync(favorite);
+            await this.favoriteRepository.SaveChangesAsync();
         }
 
         public IEnumerable<T> FavoriteBook<T>(string userId)

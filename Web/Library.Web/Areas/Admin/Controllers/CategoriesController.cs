@@ -75,6 +75,13 @@
                 return this.View(input);
             }
 
+            var imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+            input.ImgUrl,
+            $"{input.Name}",
+            GlobalConstants.CloudFolderForCategories);
+            await this.categoryService
+                .EditAsync(input.Id, input.Name, imgUrl);
+
             return this.RedirectToAction(nameof(this.All));
         }
     }

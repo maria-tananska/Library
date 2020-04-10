@@ -1,14 +1,36 @@
 ﻿@model Library.Web.ViewModels.Books.BookDetailViewModel
 
-    <div class="single-blog">
-        <div class="single-blog__img">
-            <img src="@Model.ImgUrl" alt="blog image">
-        </div>
-        <div class="single-blog__text">
-            <h4>@Model.Title</h4>
-            <span>On August 28, 2015</span>
-            <p>@Model.ShortContent</p>
-            <a href="#"><i class="fas fa-heart" style="color:red"></i></a>
-            <button class="btn btn-warning" onclick="#" type="button">Download</button>
-        </div>
+<div class="single-blog">
+    <div class="single-blog__img">
+        <img src="@Model.ImgUrl" alt="blog image">
     </div>
+    <div class="single-blog__text">
+        <h4>@Model.Title</h4>
+        <span>On August 28, 2015</span>
+        <p>@Model.ShortContent</p>
+        <span>
+            <form id="favoriteBookForm" method="post"></form>
+            <a href="#" onclick="addToFavorite(@Model.Id)"><i class="fa fa-heart" style="color:red"></i></a>
+        </span>
+        
+        <button class="btn btn-warning" onclick="#" type="button">Download</button>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        function addToFavorite(bookId) {
+            var token = $("#favoriteBookForm input[name=__RequestVerificationToken]").val();
+            var json = { bookId: bookId };
+            $.ajax({
+                url: "/api/favorite",
+                type: "POST",
+                data: JSON.stringify(json),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function () {
+                }
+            });
+        }
+    </script>
+}
