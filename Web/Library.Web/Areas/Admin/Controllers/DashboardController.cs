@@ -1,12 +1,8 @@
-﻿namespace Library.Web.Areas.Administration.Controllers
+﻿namespace Library.Web.Areas.Admin.Controllers
 {
-    using Library.Services.Data;
-    using Library.Web.ViewModels.Administration.Dashboard;
-
     using Microsoft.AspNetCore.Mvc;
 
-    [Area("Admin")]
-    public class DashboardController : Controller
+    public class DashboardController : AdministrationController
     {
        public IActionResult Index()
        {

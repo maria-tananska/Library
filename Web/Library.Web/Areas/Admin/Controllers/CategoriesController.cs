@@ -1,14 +1,14 @@
 ﻿namespace Library.Web.Areas.Admin.Controllers
 {
     using System.Threading.Tasks;
+
     using Library.Common;
     using Library.Services;
     using Library.Services.Data;
     using Library.Web.ViewModels.Admin.Categories;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area("Admin")]
-    public class CategoriesController : Controller
+    public class CategoriesController : AdministrationController
     {
         private readonly ICategoryService categoryService;
         private readonly ICloudinaryService cloudinaryService;

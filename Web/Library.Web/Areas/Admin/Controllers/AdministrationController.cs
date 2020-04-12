@@ -1,4 +1,4 @@
-﻿namespace Library.Web.Areas.Administration.Controllers
+﻿namespace Library.Web.Areas.Admin.Controllers
 {
     using Library.Common;
     using Library.Web.Controllers;

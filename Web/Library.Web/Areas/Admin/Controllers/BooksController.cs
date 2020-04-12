@@ -1,14 +1,14 @@
 ﻿namespace Library.Web.Areas.Admin.Controllers
 {
+    using System.Threading.Tasks;
+
     using Library.Common;
     using Library.Services;
     using Library.Services.Data;
     using Library.Web.ViewModels.Admin.Books;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
-    [Area("Admin")]
-    public class BooksController:Controller
+    public class BooksController : AdministrationController
     {
         private readonly IBookService bookService;
         private readonly ICategoryService categoryService;
@@ -126,6 +126,5 @@
 
             return this.RedirectToAction(nameof(this.All));
         }
-
     }
 }

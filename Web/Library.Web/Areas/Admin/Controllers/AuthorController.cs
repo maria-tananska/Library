@@ -1,12 +1,12 @@
 ﻿namespace Library.Web.Areas.Admin.Controllers
 {
+    using System.Threading.Tasks;
+
     using Library.Services.Data;
     using Library.Web.ViewModels.Admin.Author;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
-    [Area("Admin")]
-    public class AuthorController : Controller
+    public class AuthorController : AdministrationController
     {
         private readonly IAuthorService authorService;
 
