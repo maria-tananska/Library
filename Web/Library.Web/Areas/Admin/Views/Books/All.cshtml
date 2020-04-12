@@ -5,6 +5,8 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<a href="/Admin/Books/Create" class="btn btn-success m-2">+ New Book</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -21,7 +23,6 @@
                 <th scope="row">@book.Id</th>
                 <td>@book.Title</td>
                 <td>
-                    <a href="/Admin/Books/Create" class="btn btn-success">Create</a>
                     <a href="/Admin/Books/Edit/@book.Id" class="btn btn-warning">Edit</a>
                     <a href="/Admin/Books/Delete/@book.Id" class="btn btn-danger">Delete</a>
                 </td>

@@ -4,6 +4,7 @@
 }
 
 <h1>@ViewData["Title"]</h1>
+<a href="/Admin/Categories/Create" class="btn btn-success m-2">Create</a>
 <table class="table">
     <thead>
         <tr>
@@ -20,7 +21,6 @@
                 <th scope="row">@category.Id</th>
                 <td>@category.Name</td>
                 <td>
-                    <a href="/Admin/Categories/Create" class="btn btn-success">Create</a>
                     <a href="/Admin/Categories/Edit/@category.Id" class="btn btn-warning">Edit</a>
                     <a href="/Admin/Categories/Delete/@category.Id" class="btn btn-danger">Delete</a>
                 </td>

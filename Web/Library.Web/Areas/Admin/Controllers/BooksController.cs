@@ -73,6 +73,53 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        public IActionResult Edit(int id)
+        {
+            var categories = this.categoryService
+                .GetAllCategories<CategoriesDropDownViewModel>();
+
+            var authors = this.authorService
+                .GetAuthors<AuthorsDropDownViewModel>();
+
+            var dto = this.bookService.GetById(id);
+            var model = new EditBookInputModel
+            {
+                Id = dto.Id,
+                Title = dto.Title,
+                ShortContent = dto.ShortContent,
+                Pages = dto.Pages,
+                FileName = dto.FileName,
+                AutorId = dto.AutorId,
+                CategoryId = dto.CategoryId,
+                Categories = categories,
+                Authors = authors,
+            };
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBookInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            string imgUrl = null;
+            if (input.Img != null)
+            {
+               imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+               input.Img,
+               input.Title,
+               GlobalConstants.CloudFolderForBooks);
+            }
+
+            await this.bookService
+                .EditAsync(input.Id, input.Title, input.ShortContent, imgUrl, input.FileName, input.Pages, input.CategoryId, input.AutorId);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             await this.bookService.DeleteAsync(id);

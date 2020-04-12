@@ -28,7 +28,7 @@
 
         public IActionResult Detail(int id)
         {
-            var book = this.bookService.GetById<BookDetailViewModel>(id);
+            var book = this.bookService.GetByIdTo<BookDetailViewModel>(id);
 
             return this.View(book);
         }

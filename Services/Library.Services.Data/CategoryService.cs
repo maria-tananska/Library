@@ -49,9 +49,12 @@
                 throw new ArgumentException($"Category with id {id} don't exist!");
             }
 
-            category.Name = name;
-            category.Img = img;
+            if (img != null)
+            {
+                category.Img = img;
+            }
 
+            category.Name = name;
             await this.categoryRepository.SaveChangesAsync();
         }
 

@@ -7,6 +7,7 @@
 
     using Library.Data.Common.Repositories;
     using Library.Data.Models;
+    using Library.Services.Data.DTO;
     using Library.Services.Mapping;
 
     public class BookService : IBookService
@@ -58,7 +59,51 @@
             await this.bookRepository.SaveChangesAsync();
         }
 
-        public T GetById<T>(int id)
+        public async Task EditAsync(int id, string title, string shortContent, string imgUrl, string fileName, int pages, int categoryId, int authorId)
+        {
+            var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
+
+            if (book == null)
+            {
+                throw new ArgumentException($"Book with id {id} don't exist!");
+            }
+
+            if (imgUrl != null)
+            {
+                book.ImgUrl = imgUrl;
+            }
+
+            book.Title = title;
+            book.ShortContent = shortContent;
+            book.FileName = fileName;
+            book.AutorId = authorId;
+            book.CategoryId = categoryId;
+            book.Pages = pages;
+
+            await this.bookRepository.SaveChangesAsync();
+        }
+
+        public EditBookDTO GetById(int id)
+        {
+            var book = this.bookRepository.All()
+                .Where(b => b.Id == id)
+                .Select(b => new EditBookDTO
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    ShortContent = b.ShortContent,
+                    Img = b.ImgUrl,
+                    FileName = b.FileName,
+                    Pages = b.Pages,
+                    AutorId = b.AutorId,
+                    CategoryId = b.CategoryId,
+                })
+                .FirstOrDefault();
+
+            return book;
+        }
+
+        public T GetByIdTo<T>(int id)
         {
             var book = this.bookRepository.All()
                 .Where(b => b.Id == id)
