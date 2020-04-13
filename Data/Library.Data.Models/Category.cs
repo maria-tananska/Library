@@ -1,7 +1,8 @@
 ﻿namespace Library.Data.Models
 {
-    using Library.Data.Common.Models;
     using System.Collections.Generic;
+
+    using Library.Data.Common.Models;
 
     public class Category : BaseDeletableModel<int>
     {

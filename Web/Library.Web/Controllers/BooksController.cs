@@ -3,17 +3,25 @@
     using Library.Data.Models;
     using Library.Services.Data;
     using Library.Web.ViewModels.Books;
+    using Library.Web.ViewModels.Favorite;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class BooksController : BaseController
     {
         private readonly IBookService bookService;
+        private readonly IFavoriteService favoriteService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public BooksController(
-            IBookService bookService)
+            IBookService bookService,
+            IFavoriteService favoriteService,
+            UserManager<ApplicationUser> userManager)
         {
             this.bookService = bookService;
+            this.favoriteService = favoriteService;
+            this.userManager = userManager;
         }
 
         public IActionResult All()
@@ -31,6 +39,19 @@
             var book = this.bookService.GetByIdTo<BookDetailViewModel>(id);
 
             return this.View(book);
+        }
+
+        [Authorize]
+        public IActionResult Favorite()
+        {
+            string userId = this.userManager.GetUserId(this.User);
+            var model = new AllFavoriteBooksViewModel
+            {
+                FavouriteBook = this.favoriteService
+                .FavoriteBook<FavoriteBookViewModel>(userId),
+            };
+
+            return this.View(model);
         }
     }
 }

@@ -14,5 +14,7 @@
         T GetById<T>(int id);
 
         Task EditAsync(string firstName, string lastName, int id);
+
+        int AuthorsCount();
     }
 }

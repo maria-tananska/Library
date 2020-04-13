@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Threading.Tasks;
 
     [ApiController]
@@ -26,6 +27,12 @@
         public async Task<IActionResult> Post(FavoriteInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
+
+            if (userId == null)
+            {
+                throw new ArgumentException($"This user don't exist!");
+            }
+
             await this.favoriteService.AddToFavoriteAsync(userId, input.BookId);
 
             return this.Ok();

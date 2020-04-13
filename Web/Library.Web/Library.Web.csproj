@@ -44,4 +44,8 @@
     <ProjectReference Include="..\Library.Web.Infrastructure\Library.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Library.Web.ViewModels\Library.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>

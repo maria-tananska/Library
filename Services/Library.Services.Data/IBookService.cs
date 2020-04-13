@@ -9,11 +9,17 @@
     {
         IEnumerable<T> All<T>();
 
+        IEnumerable<T> GetNewBooks<T>();
+
         Task<int> AddAsync(string title, string shortContent, string imgUrl, string fileName, int pages, int categoryId, int authorId);
 
         EditBookDTO GetById(int id);
 
         T GetByIdTo<T>(int id);
+
+        int BooksCount();
+
+        int PagesCount();
 
         Task DeleteAsync(int id);
 

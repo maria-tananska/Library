@@ -1,9 +1,67 @@
-﻿@using Library.Common
+﻿@model Library.Web.ViewModels.Home.IndexViewModel
+@using Library.Common
 @{
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<header class="lead-header image-background">
+    <br />
+    <h1 class="text-center">Wellcome to @GlobalConstants.SystemName</h1>
+    <br />
+</header>
+
+<!-- Books -->
+<section class="fh5co-books">
+    <div class="site-container">
+        <h2 class="universal-h2 universal-h2-bckg">New Books</h2>
+        <div class="books">
+            @foreach (var book in Model.Books)
+            {
+                <div class="single-book">
+                    <a href="/Books/Detail/@book.Id" class="single-book__img">
+                        <img src=@book.ImgUrl width="100" alt="book">
+                    </a>
+                    <h4 class="single-book__title">@book.Title</h4>
+                    <span class="single-book__price">@book.AutorFirstName @book.AutorLastName</span>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Books -->
+
+<!-- Counter -->
+<div class="fh5co-counter counters">
+    <div class="counter-inner site-container">
+        <div class="single-count">
+            <span class="count">@Model.BooksCount</span>
+            <div class="single-count__text">
+                <i class="fa fa-book counter-icon"></i>
+                <p class="m-1">Books</p>
+            </div>
+        </div>
+        <div class="single-count">
+            <span class="count">@Model.PagesCount</span>
+            <div class="single-count__text">
+                <i class="fa fa-book-open counter-icon"></i>
+                <p class="m-1">Pages</p>
+            </div>
+        </div>
+        <div class="single-count">
+            <span class="count">@Model.AuthorsCount</span>
+            <div class="single-count__text">
+                <i class="fa fa-user counter-icon"></i>
+                <p class="m-1">Authors</p>
+            </div>
+        </div>
+        <div class="single-count">
+            <span class="count">@Model.CategoriesCount</span>
+            <div class="single-count__text">
+                <i class="fa fa-archive counter-icon"></i>
+                <p class="m-1">Categories</p>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Counter -->

@@ -32,6 +32,13 @@
             return author.Id;
         }
 
+        public int AuthorsCount()
+        {
+            var count = this.authorRepository.All().Count();
+
+            return count;
+        }
+
         public async Task DeleteByIdAsync(int id)
         {
             var author = await this.authorRepository.GetByIdWithDeletedAsync(id);

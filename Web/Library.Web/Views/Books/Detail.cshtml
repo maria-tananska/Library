@@ -8,11 +8,14 @@
         <h4>@Model.Title</h4>
         <span>On August 28, 2015</span>
         <p>@Model.ShortContent</p>
-        <span>
-            <form id="favoriteBookForm" method="post"></form>
-            <a href="#" onclick="addToFavorite(@Model.Id)"><i class="fa fa-heart" style="color:red"></i></a>
-        </span>
-        
+        @if (this.User != null)
+        {
+            <span>
+                <form id="favoriteBookForm" method="post"></form>
+                <a href="#" onclick="addToFavorite(@Model.Id)" data-toggle="popover" data-content="Add to favorite book"><i class="fa fa-heart" style="color:red"></i></a>
+            </span>
+        }
+
         <button class="btn btn-warning" onclick="#" type="button">Download</button>
     </div>
 </div>

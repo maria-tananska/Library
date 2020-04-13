@@ -14,5 +14,7 @@
         T GetById<T>(int id);
 
         Task EditAsync(int id, string name, string img);
+
+        int CategoriesCount();
     }
 }

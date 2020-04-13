@@ -46,6 +46,13 @@
             return books;
         }
 
+        public int BooksCount()
+        {
+            var count = this.bookRepository.All().Count();
+
+            return count;
+        }
+
         public async Task DeleteAsync(int id)
         {
             var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
@@ -111,6 +118,24 @@
                 .FirstOrDefault();
 
             return book;
+        }
+
+        public IEnumerable<T> GetNewBooks<T>()
+        {
+            var book = this.bookRepository.All()
+                .OrderBy(x => x.CreatedOn)
+                .Take(3)
+                .To<T>()
+                .ToList();
+
+            return book;
+        }
+
+        public int PagesCount()
+        {
+            var count = this.bookRepository.All().Sum(b => b.Pages);
+
+            return count;
         }
     }
 }

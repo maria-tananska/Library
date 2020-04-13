@@ -1,4 +1,4 @@
-﻿namespace Library.Web.ViewModels.Home
+﻿namespace Library.Web.ViewModels.Favorite
 {
     using Library.Data.Models;
     using Library.Services.Mapping;

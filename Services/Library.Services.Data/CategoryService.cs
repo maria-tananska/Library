@@ -18,6 +18,13 @@
             this.categoryRepository = categoryRepository;
         }
 
+        public int CategoriesCount()
+        {
+            var count = this.categoryRepository.All().Count();
+
+            return count;
+        }
+
         public async Task<int> CreateAsync(string name, string img)
         {
             var category = new Category

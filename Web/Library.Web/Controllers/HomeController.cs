@@ -5,6 +5,7 @@
     using Library.Data.Models;
     using Library.Services.Data;
     using Library.Web.ViewModels;
+    using Library.Web.ViewModels.Books;
     using Library.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -14,32 +15,39 @@
     {
         private readonly IFavoriteService favoriteService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ICategoryService categoryService;
+        private readonly IBookService bookService;
+        private readonly IAuthorService authorService;
 
-        public HomeController(IFavoriteService favoriteService, UserManager<ApplicationUser> userManager)
+        public HomeController(
+            IFavoriteService favoriteService,
+            UserManager<ApplicationUser> userManager,
+            ICategoryService categoryService,
+            IBookService bookService,
+            IAuthorService authorService)
         {
             this.favoriteService = favoriteService;
             this.userManager = userManager;
+            this.categoryService = categoryService;
+            this.bookService = bookService;
+            this.authorService = authorService;
         }
 
+        [Route("/")]
         public IActionResult Index()
         {
-            if (this.User.Identity.IsAuthenticated)
-            {
-                return this.RedirectToAction(nameof(this.IndexLoggin));
-            }
-
-            return this.View();
-        }
-
-        [Authorize]
-        [Route("/Home/Index")]
-        public IActionResult IndexLoggin()
-        {
-            string userId = this.userManager.GetUserId(this.User);
+            var books = this.bookService.GetNewBooks<BookViewModel>();
+            var bookCount = this.bookService.BooksCount();
+            var pagesCount = this.bookService.PagesCount();
+            var authorsCount = this.authorService.AuthorsCount();
+            var categoriesCount = this.categoryService.CategoriesCount();
             var model = new IndexViewModel
             {
-               FavouriteBook = this.favoriteService
-                .FavoriteBook<FavoriteBookViewModel>(userId),
+                Books = books,
+                BooksCount = bookCount,
+                PagesCount = pagesCount,
+                AuthorsCount = authorsCount,
+                CategoriesCount = categoriesCount,
             };
 
             return this.View(model);

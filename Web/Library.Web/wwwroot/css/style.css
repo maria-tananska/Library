@@ -49,6 +49,10 @@
 
 /* Universal style end */
 /* Includes */
+.counter-icon{
+    margin-top:0.6em;
+    margin-right:0.2em;
+}
 .site-navigation {
   position: absolute;
   top: 4.6%;
@@ -390,6 +394,16 @@
 
 .slick-slide:focus {
   outline: none; }
+
+.lead-header.image-background {
+    position: relative;
+    padding: 1% 3%;
+    color: #fff;
+    background:url(/images/bookheart.jpg) no-repeat top center;
+    background-size: cover;
+    z-index:0;
+    margin-bottom: 3em;
+} 
 
 .fh5co-books {
   margin-bottom: 122px; }
