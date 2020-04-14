@@ -11,6 +11,8 @@
 
         public string ShortContent { get; set; }
 
+        public string FileName { get; set; }
+
         public string ImgUrl { get; set; }
     }
 }

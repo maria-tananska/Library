@@ -16,7 +16,12 @@
             this.cloudinary = cloudinary;
         }
 
-        public async Task<string> UploadPhotoAsync(IFormFile file, string fileName, string folder)
+        public void Download(string fileName)
+        {
+            var result = this.cloudinary.DownloadPrivate(fileName, true, "txt");
+        }
+
+        public async Task<string> UploadAsync(IFormFile file, string fileName, string folder)
         {
             byte[] destinationData;
 
@@ -30,13 +35,13 @@
 
             using (var memoryStream = new MemoryStream(destinationData))
             {
-                ImageUploadParams uploadParams = new ImageUploadParams
+                RawUploadParams uploadParams = new RawUploadParams
                 {
                     Folder = folder,
                     File = new FileDescription(fileName, memoryStream),
                 };
 
-                uploadResult = await this.cloudinary.UploadAsync(uploadParams);
+                uploadResult = await this.cloudinary.UploadAsync(uploadParams, "auto");
             }
 
             return uploadResult?.SecureUri.AbsoluteUri;

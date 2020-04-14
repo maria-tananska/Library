@@ -7,6 +7,7 @@
     using Library.Services.Data;
     using Library.Web.ViewModels.Admin.Books;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.FileProviders;
 
     public class BooksController : AdministrationController
     {
@@ -62,13 +63,18 @@
                 return this.View(input);
             }
 
-            var imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+            var imgUrl = await this.cloudinaryService.UploadAsync(
                 input.Img,
-                $"{input.Title}",
+                input.Title,
                 GlobalConstants.CloudFolderForBooks);
 
+            var fileUrl = await this.cloudinaryService.UploadAsync(
+                input.File,
+                input.Title,
+                GlobalConstants.CloudFolderForBooksContent);
+
             await this.bookService
-                .AddAsync(input.Title, input.ShortContent, imgUrl, input.FileName, input.Pages, input.CategoryId, input.AutorId);
+                .AddAsync(input.Title, input.ShortContent, imgUrl, fileUrl, input.Pages, input.CategoryId, input.AutorId);
 
             return this.RedirectToAction(nameof(this.All));
         }
@@ -109,7 +115,7 @@
             string imgUrl = null;
             if (input.Img != null)
             {
-               imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+               imgUrl = await this.cloudinaryService.UploadAsync(
                input.Img,
                input.Title,
                GlobalConstants.CloudFolderForBooks);

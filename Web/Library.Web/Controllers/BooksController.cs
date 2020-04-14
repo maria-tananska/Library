@@ -1,6 +1,7 @@
 ﻿namespace Library.Web.Controllers
 {
     using Library.Data.Models;
+    using Library.Services;
     using Library.Services.Data;
     using Library.Web.ViewModels.Books;
     using Library.Web.ViewModels.Favorite;
@@ -13,15 +14,18 @@
         private readonly IBookService bookService;
         private readonly IFavoriteService favoriteService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ICloudinaryService cloudinaryService;
 
         public BooksController(
             IBookService bookService,
             IFavoriteService favoriteService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ICloudinaryService cloudinaryService)
         {
             this.bookService = bookService;
             this.favoriteService = favoriteService;
             this.userManager = userManager;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public IActionResult All()
@@ -52,6 +56,13 @@
             };
 
             return this.View(model);
+        }
+
+        public IActionResult Download(string fileName)
+        {
+            this.cloudinaryService.Download(fileName);
+
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

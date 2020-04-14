@@ -17,7 +17,8 @@
         [Required]
         public IFormFile Img { get; set; }
 
-        public string FileName { get; set; }
+        [Required]
+        public IFormFile File { get; set; }
 
         public int Pages { get; set; }
 

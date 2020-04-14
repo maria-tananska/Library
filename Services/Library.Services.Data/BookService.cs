@@ -90,6 +90,16 @@
             await this.bookRepository.SaveChangesAsync();
         }
 
+        public IEnumerable<T> GetBooksByCategoryId<T>(int categoryId)
+        {
+            var books = this.bookRepository.All()
+                .Where(b => b.CategoryId == categoryId)
+                .To<T>()
+                .ToList();
+
+            return books;
+        }
+
         public EditBookDTO GetById(int id)
         {
             var book = this.bookRepository.All()

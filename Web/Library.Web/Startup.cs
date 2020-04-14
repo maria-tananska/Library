@@ -19,12 +19,13 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Configuration.Json;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        private IConfiguration configuration;
 
         public Startup(IConfiguration configuration)
         {

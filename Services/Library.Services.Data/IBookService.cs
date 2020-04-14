@@ -7,6 +7,8 @@
 
     public interface IBookService
     {
+        IEnumerable<T> GetBooksByCategoryId<T>(int categoryId);
+
         IEnumerable<T> All<T>();
 
         IEnumerable<T> GetNewBooks<T>();

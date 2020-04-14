@@ -48,4 +48,10 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

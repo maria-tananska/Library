@@ -9,5 +9,7 @@
         public const string CloudFolderForCategories = "categories_photos";
 
         public const string CloudFolderForBooks = "books_photos";
+
+        public const string CloudFolderForBooksContent = "books_file";
     }
 }

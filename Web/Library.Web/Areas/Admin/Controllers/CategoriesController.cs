@@ -43,7 +43,7 @@
                 return this.View(input);
             }
 
-            var imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+            var imgUrl = await this.cloudinaryService.UploadAsync(
             input.Img,
             $"{input.Name}",
             GlobalConstants.CloudFolderForCategories);
@@ -78,7 +78,7 @@
             string imgUrl = null;
             if (input.ImgUrl != null)
             {
-                imgUrl = await this.cloudinaryService.UploadPhotoAsync(
+                imgUrl = await this.cloudinaryService.UploadAsync(
                input.ImgUrl,
                $"{input.Name}",
                GlobalConstants.CloudFolderForCategories);
