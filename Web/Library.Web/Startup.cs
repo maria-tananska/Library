@@ -24,18 +24,18 @@
 
     public class Startup
     {
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration configuration;
 
         public Startup(IConfiguration configuration)
         {
-            this.Configuration = configuration;
+            this.configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
@@ -50,7 +50,7 @@
             services.AddControllersWithViews();
             services.AddRazorPages();
 
-            services.AddSingleton(this.Configuration);
+            services.AddSingleton(this.configuration);
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -68,9 +68,9 @@
 
             // Cloudinary
             Account account = new Account(
-                this.Configuration["Cloudinary:AppName"],
-                this.Configuration["Cloudinary:AppKey"],
-                this.Configuration["Cloudinary:AppSecret"]);
+                this.configuration["Cloudinary:AppName"],
+                this.configuration["Cloudinary:AppKey"],
+                this.configuration["Cloudinary:AppSecret"]);
             Cloudinary cloudinary = new Cloudinary(account);
 
             services.AddSingleton(cloudinary);

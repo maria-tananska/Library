@@ -1,7 +1,18 @@
-﻿
+﻿@model Library.Web.ViewModels.Category.AllViewModel
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "Categories";
 }
 
-<h1>All</h1>
+<h1>@ViewData["Title"]</h1>
+
+@foreach (var category in Model.Categories)
+{
+    <div class="col-md-4 media">
+        <img src="@category.Img" width="100" class="mr-3" alt="@category.Name">
+        <div class="media-body">
+            <h3 class="mt-0">@category.Name</h3>
+            <a href="/Categories/Books" class="btn btn-primary mt-5">View Books</a>
+        </div>
+    </div>
+}
 
