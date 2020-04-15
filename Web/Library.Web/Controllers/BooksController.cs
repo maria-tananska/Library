@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using System.Net;
 
     public class BooksController : BaseController
     {
@@ -56,13 +57,6 @@
             };
 
             return this.View(model);
-        }
-
-        public IActionResult Download(string fileName)
-        {
-            this.cloudinaryService.Download(fileName);
-
-            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

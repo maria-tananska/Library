@@ -7,7 +7,5 @@
     public interface ICloudinaryService
     {
         Task<string> UploadAsync(IFormFile file, string fileName, string folder);
-
-        void Download(string fileName);
     }
 }

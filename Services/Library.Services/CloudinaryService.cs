@@ -16,11 +16,6 @@
             this.cloudinary = cloudinary;
         }
 
-        public void Download(string fileName)
-        {
-            var result = this.cloudinary.DownloadPrivate(fileName, true, "txt");
-        }
-
         public async Task<string> UploadAsync(IFormFile file, string fileName, string folder)
         {
             byte[] destinationData;
