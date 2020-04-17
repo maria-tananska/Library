@@ -5,10 +5,12 @@
 
     public interface IFavoriteService
     {
-       Task AddToFavoriteAsync(string userId, int bookId);
+        Task AddToFavoriteAsync(string userId, int bookId);
 
-       IEnumerable<T> FavoriteBook<T>(string userId);
+        IEnumerable<T> FavoriteBook<T>(string userId);
 
-       bool IsExist(string userId, int bookid);
+        bool IsExist(string userId, int bookid);
+
+        void RemoveFromFavorite(string userId, int bookId);
     }
 }

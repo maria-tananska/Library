@@ -60,5 +60,14 @@
 
             return true;
         }
+
+        public void RemoveFromFavorite(string userId, int bookId)
+        {
+           var book = this.favoriteRepository.All()
+                .Where(x => x.UserId == userId && x.BookId == bookId)
+                .FirstOrDefault();
+
+           book.IsDeleted = true;
+        }
     }
 }

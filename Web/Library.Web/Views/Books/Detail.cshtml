@@ -10,10 +10,8 @@
         <p>@Model.ShortContent</p>
         @if (this.User != null)
         {
-            <span>
                 <form id="favoriteBookForm" method="post"></form>
-                <a href="#" onclick="addToFavorite(@Model.Id)" data-toggle="popover" data-content="Add to favorite book"><i class="fa fa-heart" style="color:red"></i></a>
-            </span>
+                <a href="#" onclick="addToFavorite(@Model.Id)" data-toggle="popover" data-content="Add to favorite book"><i class="fa fa-heart" style="color:red"></i></a> 
         }
 
         <a class="btn btn-warning" href="@Model.FileName" >Download</a>

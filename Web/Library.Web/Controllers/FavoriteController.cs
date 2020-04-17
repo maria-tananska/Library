@@ -33,6 +33,11 @@
                 throw new ArgumentException($"This user don't exist!");
             }
 
+            if (this.favoriteService.IsExist(userId, input.BookId))
+            {
+
+            }
+
             await this.favoriteService.AddToFavoriteAsync(userId, input.BookId);
 
             return this.Ok();

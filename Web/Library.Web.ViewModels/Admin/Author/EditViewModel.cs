@@ -1,8 +1,9 @@
 ﻿namespace Library.Web.ViewModels.Admin.Author
 {
+    using System.ComponentModel.DataAnnotations;
+
     using Library.Data.Models;
     using Library.Services.Mapping;
-    using System.ComponentModel.DataAnnotations;
 
     public class EditViewModel : IMapFrom<Autor>
     {
@@ -10,10 +11,12 @@
 
         [Required]
         [MinLength(3)]
+        [MaxLength(20)]
         public string FirstName { get; set; }
 
         [Required]
         [MinLength(3)]
+        [MaxLength(20)]
         public string LastName { get; set; }
     }
 }

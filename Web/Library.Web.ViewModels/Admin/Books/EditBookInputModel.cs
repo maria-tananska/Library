@@ -12,14 +12,20 @@
     {
         public int Id { get; set; }
 
+        [Required]
+        [MinLength(3)]
+        [MaxLength(30)]
         public string Title { get; set; }
 
+        [Required]
         public string ShortContent { get; set; }
 
+        [Required]
         public IFormFile Img { get; set; }
 
-        public string FileName { get; set; }
+        public IFormFile FileName { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int Pages { get; set; }
 
         [DisplayName("Category")]

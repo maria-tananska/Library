@@ -12,6 +12,7 @@
 
         [Required]
         [MinLength(3)]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public IFormFile ImgUrl { get; set; }

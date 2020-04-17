@@ -10,8 +10,13 @@
 
     public class CreateViewModel : IMapTo<Book>
     {
+        [Required]
+        [MinLength(3)]
+        [MaxLength(30)]
         public string Title { get; set; }
 
+        [Required]
+        [MinLength(20)]
         public string ShortContent { get; set; }
 
         [Required]
@@ -20,6 +25,8 @@
         [Required]
         public IFormFile File { get; set; }
 
+        [Required]
+        [Range(1, int.MaxValue)]
         public int Pages { get; set; }
 
         [DisplayName("Category")]
