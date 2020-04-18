@@ -11,6 +11,6 @@
 
         bool IsExist(string userId, int bookid);
 
-        void RemoveFromFavorite(string userId, int bookId);
+        Task RemoveFromFavoriteAsync(string userId, int bookId);
     }
 }

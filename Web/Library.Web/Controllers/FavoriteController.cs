@@ -1,13 +1,14 @@
 ﻿namespace Library.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using Library.Data.Models;
     using Library.Services.Data;
     using Library.Web.ViewModels.Favorite;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
 
     [ApiController]
     [Route("api/[controller]")]
@@ -24,9 +25,10 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Post(FavoriteInputModel input)
+        public async Task<ActionResult<FavoriteResponseModel>> Post(FavoriteInputModel input)
         {
             var userId = this.userManager.GetUserId(this.User);
+            string result = string.Empty;
 
             if (userId == null)
             {
@@ -35,12 +37,17 @@
 
             if (this.favoriteService.IsExist(userId, input.BookId))
             {
+               await this.favoriteService.RemoveFromFavoriteAsync(userId, input.BookId);
 
+               result = "Remove from favorite!";
+            }
+            else
+            {
+                await this.favoriteService.AddToFavoriteAsync(userId, input.BookId);
+                result = "Add to favorite!";
             }
 
-            await this.favoriteService.AddToFavoriteAsync(userId, input.BookId);
-
-            return this.Ok();
+            return new FavoriteResponseModel { Result = result };
         }
     }
 }

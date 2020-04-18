@@ -94,7 +94,6 @@
                 Title = dto.Title,
                 ShortContent = dto.ShortContent,
                 Pages = dto.Pages,
-                FileName = dto.FileName,
                 AutorId = dto.AutorId,
                 CategoryId = dto.CategoryId,
                 Categories = categories,
@@ -113,6 +112,16 @@
             }
 
             string imgUrl = null;
+            string fileUrl = null;
+
+            if (input.FileName != null)
+            {
+                fileUrl = await this.cloudinaryService.UploadAsync(
+                input.FileName,
+                input.Title,
+                GlobalConstants.CloudFolderForBooksContent);
+            }
+
             if (input.Img != null)
             {
                imgUrl = await this.cloudinaryService.UploadAsync(
@@ -122,7 +131,7 @@
             }
 
             await this.bookService
-                .EditAsync(input.Id, input.Title, input.ShortContent, imgUrl, input.FileName, input.Pages, input.CategoryId, input.AutorId);
+                .EditAsync(input.Id, input.Title, input.ShortContent, imgUrl, fileUrl, input.Pages, input.CategoryId, input.AutorId);
             return this.RedirectToAction(nameof(this.All));
         }
 
