@@ -37,14 +37,14 @@
 
             if (this.favoriteService.IsExist(userId, input.BookId))
             {
-               await this.favoriteService.RemoveFromFavoriteAsync(userId, input.BookId);
+                await this.favoriteService.RemoveFromFavoriteAsync(userId, input.BookId);
 
-               result = "Remove from favorite!";
+                result = "Book is remove from favorite!";
             }
             else
             {
                 await this.favoriteService.AddToFavoriteAsync(userId, input.BookId);
-                result = "Add to favorite!";
+                result = "Book is add to favorite!";
             }
 
             return new FavoriteResponseModel { Result = result };
