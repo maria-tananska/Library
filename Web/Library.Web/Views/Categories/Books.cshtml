@@ -1,0 +1,16 @@
+﻿@model Library.Web.ViewModels.Books.AllBookViewModel
+@{
+    ViewData["Title"] = "Books";
+}
+
+@foreach (var book in Model.Books)
+{
+    <div class="single-book">
+        <a href="/Books/Detail/@book.Id" class="single-book__img">
+            <img src="@book.ImgUrl" width="100" alt="@book.Title image">
+        </a>
+        <h4 class="single-book__title">@book.Title</h4>
+        <span class="single-book__price">@book.AutorFirstName @book.AutorLastName</span>
+    </div>
+}
+
