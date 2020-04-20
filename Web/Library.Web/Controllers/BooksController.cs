@@ -34,6 +34,19 @@
             return this.View(books);
         }
 
+        [HttpPost]
+        public IActionResult All(AllBookViewModel input)
+        {
+            var model = new AllBookViewModel
+            {
+                Books = this.bookService
+                .SearchBooks<BookViewModel>(input.SearchText),
+
+            };
+
+            return this.View(model);
+        }
+
         public IActionResult Detail(int id)
         {
             var book = this.bookService.GetByIdTo<BookDetailViewModel>(id);

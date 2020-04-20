@@ -5,5 +5,8 @@
     public class AllBookViewModel
     {
         public IEnumerable<BookViewModel> Books { get; set; }
+
+        public string SearchText { get; set; }
+
     }
 }

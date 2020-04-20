@@ -1,6 +1,12 @@
 ﻿@model Library.Web.ViewModels.Books.AllBookViewModel
 
 <h1 class="text-center">All Book</h1>
+<form asp-controller="Books" asp-action="All" method="post">
+    <p>
+        Book Title: <input asp-for="SearchText">
+        <input type="submit" class="btn btn-primary" value="Search"/>
+    </p>
+</form>
 <div class="books">
     @foreach (var book in Model.Books)
     {

@@ -11,6 +11,8 @@
 
         IEnumerable<T> All<T>();
 
+        IEnumerable<T> SearchBooks<T>(string searchText);
+
         IEnumerable<T> GetNewBooks<T>();
 
         Task<int> AddAsync(string title, string shortContent, string imgUrl, string fileName, int pages, int categoryId, int authorId);

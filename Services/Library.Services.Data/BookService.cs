@@ -147,5 +147,25 @@
 
             return count;
         }
+
+        public IEnumerable<T> SearchBooks<T>(string searchText)
+        {
+            var results = new List<T>();
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                results = this.bookRepository.All()
+                .Where(b => b.Title.Contains(searchText))
+                .To<T>()
+                .ToList();
+            }
+            else
+            {
+                results = this.bookRepository.All()
+                    .To<T>()
+                    .ToList();
+            }
+
+            return results;
+        }
     }
 }
