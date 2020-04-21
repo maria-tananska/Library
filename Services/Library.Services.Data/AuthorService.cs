@@ -20,6 +20,12 @@
 
         public async Task<int> AddAsync(string firstName, string lastName)
         {
+            if (firstName == null || lastName == null)
+            {
+                throw new ArgumentException("Properti can not be null");
+            }
+
+
             var author = new Autor
             {
                 FirstName = firstName,
@@ -42,6 +48,12 @@
         public async Task DeleteByIdAsync(int id)
         {
             var author = await this.authorRepository.GetByIdWithDeletedAsync(id);
+
+            if (author == null)
+            {
+                throw new ArgumentException($"Author with id:{id} dont exist!");
+            }
+
             this.authorRepository.Delete(author);
             await this.authorRepository.SaveChangesAsync();
         }

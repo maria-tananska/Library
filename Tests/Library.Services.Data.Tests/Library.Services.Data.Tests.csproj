@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Library.Data\Library.Data.csproj" />
     <ProjectReference Include="..\..\Services\Library.Services.Data\Library.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\Library.Web.ViewModels\Library.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
