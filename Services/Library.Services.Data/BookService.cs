@@ -13,10 +13,14 @@
     public class BookService : IBookService
     {
         private readonly IDeletableEntityRepository<Book> bookRepository;
+        private readonly IDeletableEntityRepository<Category> categoryRepository;
 
-        public BookService(IDeletableEntityRepository<Book> bookRepository)
+        public BookService(
+            IDeletableEntityRepository<Book> bookRepository,
+            IDeletableEntityRepository<Category> categoryRepository)
         {
             this.bookRepository = bookRepository;
+            this.categoryRepository = categoryRepository;
         }
 
         public async Task<int> AddAsync(string title, string shortContent, string imgUrl, string fileName, int pages, int categoryId, int authorId)
@@ -55,25 +59,27 @@
 
         public async Task DeleteAsync(int id)
         {
-            var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
-
-            if (book == null)
+            var exist = this.bookRepository.All().Any(b => b.Id == id);
+            if (!exist)
             {
                 throw new ArgumentException($"Book with id {id} don't exist");
             }
 
+            var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
             book.IsDeleted = true;
             await this.bookRepository.SaveChangesAsync();
         }
 
         public async Task EditAsync(int id, string title, string shortContent, string imgUrl, string fileName, int pages, int categoryId, int authorId)
         {
-            var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
+            var exist = this.bookRepository.All().Any(b => b.Id == id);
 
-            if (book == null)
+            if (exist == false)
             {
-                throw new ArgumentException($"Book with id {id} don't exist!");
+                throw new ArgumentException($"Book with id {id} doesn't exist!");
             }
+
+            var book = await this.bookRepository.GetByIdWithDeletedAsync(id);
 
             if (imgUrl != null)
             {
@@ -92,6 +98,12 @@
 
         public IEnumerable<T> GetBooksByCategoryId<T>(int categoryId)
         {
+            var exist = this.categoryRepository.All().Any(c => c.Id == categoryId);
+            if (exist == false)
+            {
+                throw new ArgumentException($"Category with this id doesn't exist!");
+            }
+
             var books = this.bookRepository.All()
                 .Where(b => b.CategoryId == categoryId)
                 .To<T>()
