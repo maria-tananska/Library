@@ -169,9 +169,7 @@
             var service = new AuthorService(repository);
 
             Assert.Throws<ArgumentException>(() =>
-            {
-                service.GetById<AuthorViewModel>(1);
-            });
+            service.GetById<AuthorViewModel>(1));
         }
 
         [Fact]

@@ -90,6 +90,13 @@
 
         public T GetById<T>(int id)
         {
+            var exist = this.authorRepository.All().Any(a => a.Id == id);
+
+            if (!exist)
+            {
+                throw new ArgumentException($"Category with id: {id} doesn't exist!");
+            }
+
             var author = this.authorRepository.All()
                 .Where(a => a.Id == id)
                 .To<T>()

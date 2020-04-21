@@ -42,7 +42,12 @@
         public async Task DeleteByIdAsync(int id)
         {
             var category = await this.categoryRepository.GetByIdWithDeletedAsync(id);
-            //this.categoryRepository.Delete(category);
+
+            if (category == null)
+            {
+                throw new ArgumentException($"Category with id {id} doesn't exist.");
+            }
+
             category.IsDeleted = true;
             await this.categoryRepository.SaveChangesAsync();
         }
@@ -76,15 +81,17 @@
 
         public T GetById<T>(int id)
         {
+            var exist = this.categoryRepository.All().Any(c => c.Id == id);
+
+            if (exist == false)
+            {
+                throw new ArgumentException($"Category with id {id} don't exist!");
+            }
+
             var category = this.categoryRepository.All()
                 .Where(c => c.Id == id)
                 .To<T>()
                 .FirstOrDefault();
-
-            if (category == null)
-            {
-                throw new ArgumentException($"Category with id {id} don't exist!");
-            }
 
             return category;
         }
