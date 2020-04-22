@@ -31,7 +31,7 @@
 
             await this.authorService.AddAsync(input.FirstName, input.LastName);
 
-            return this.View();
+            return this.RedirectToAction(nameof(this.Authors));
         }
 
         public IActionResult Authors()

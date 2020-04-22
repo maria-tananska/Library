@@ -202,7 +202,6 @@
                 Assert.Equal(expectedResult[i].Id, actualResult[i].Id);
                 Assert.Equal(expectedResult[i].Title, actualResult[i].Title);
             }
-
         }
 
         [Fact]
@@ -259,6 +258,89 @@
                 Assert.Equal(expectedResult[i].Id, actualResult[i].Id);
                 Assert.Equal(expectedResult[i].Title, actualResult[i].Title);
             }
+        }
+
+        [Fact]
+        public async Task SearchBookShouldReturnCorrectData()
+        {
+            this.InitializeMapper();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var dbContext = new ApplicationDbContext(options);
+            await this.SeedBooksAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Book>(dbContext);
+            var categoryRepository = new EfDeletableEntityRepository<Category>(dbContext);
+            var service = new BookService(repository, categoryRepository);
+            await service.AddAsync("SearchBook", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+
+            var actualResult = service.SearchBooks<BookDetailViewModel>("Search").ToList();
+
+            Assert.Equal("SearchBook", actualResult[0].Title);
+            Assert.Equal("Content", actualResult[0].ShortContent);
+        }
+
+        [Fact]
+        public async Task SearchBookShouldReturnCorrectCount()
+        {
+            this.InitializeMapper();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var dbContext = new ApplicationDbContext(options);
+            await this.SeedBooksAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Book>(dbContext);
+            var categoryRepository = new EfDeletableEntityRepository<Category>(dbContext);
+            var service = new BookService(repository, categoryRepository);
+            await service.AddAsync("SearchBook", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+
+            var actualResult = service.SearchBooks<BookDetailViewModel>("Search").ToList();
+
+            Assert.Equal(1, actualResult.Count);
+        }
+
+        [Fact]
+        public async Task GetNewBooksShouldReturnCorrectData()
+        {
+            this.InitializeMapper();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var dbContext = new ApplicationDbContext(options);
+            await this.SeedBooksAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Book>(dbContext);
+            var categoryRepository = new EfDeletableEntityRepository<Category>(dbContext);
+            var service = new BookService(repository, categoryRepository);
+            await service.AddAsync("NewBook1", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+            await service.AddAsync("NewBook2", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+            await service.AddAsync("NewBook3", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+
+            var actualResult = service.GetNewBooks<BookDetailViewModel>().ToList();
+
+            Assert.Equal("NewBook3", actualResult[0].Title);
+            Assert.Equal("NewBook2", actualResult[1].Title);
+            Assert.Equal("NewBook1", actualResult[2].Title);
+        }
+
+        [Fact]
+        public async Task GetNewBooksShouldReturnCorrectCount()
+        {
+            this.InitializeMapper();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()).Options;
+            var dbContext = new ApplicationDbContext(options);
+            await this.SeedBooksAsync(dbContext);
+
+            var repository = new EfDeletableEntityRepository<Book>(dbContext);
+            var categoryRepository = new EfDeletableEntityRepository<Category>(dbContext);
+            var service = new BookService(repository, categoryRepository);
+            await service.AddAsync("NewBook1", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+            await service.AddAsync("NewBook2", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+            await service.AddAsync("NewBook3", "Content", "ImgUrl", "fileUrl", 20, 1, 1);
+
+            var actualResult = service.GetNewBooks<BookDetailViewModel>().ToList().Count;
+
+            Assert.Equal(3, actualResult);
         }
 
         private async Task SeedBooksAsync(ApplicationDbContext dbContext)

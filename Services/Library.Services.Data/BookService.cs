@@ -145,7 +145,7 @@
         public IEnumerable<T> GetNewBooks<T>()
         {
             var book = this.bookRepository.All()
-                .OrderBy(x => x.CreatedOn)
+                .OrderByDescending(x => x.CreatedOn)
                 .Take(3)
                 .To<T>()
                 .ToList();
