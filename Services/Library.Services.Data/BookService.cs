@@ -86,9 +86,13 @@
                 book.ImgUrl = imgUrl;
             }
 
+            if (fileName != null)
+            {
+                book.FileName = fileName;
+            }
+
             book.Title = title;
             book.ShortContent = shortContent;
-            book.FileName = fileName;
             book.AutorId = authorId;
             book.CategoryId = categoryId;
             book.Pages = pages;

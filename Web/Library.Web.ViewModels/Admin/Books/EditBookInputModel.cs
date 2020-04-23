@@ -20,7 +20,6 @@
         [Required]
         public string ShortContent { get; set; }
 
-        [Required]
         public IFormFile Img { get; set; }
 
         public IFormFile FileName { get; set; }

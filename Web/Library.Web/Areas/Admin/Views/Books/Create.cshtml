@@ -22,19 +22,19 @@
 
     <div>
         <label asp-for="Img"></label>
-        <input asp-for="Img" type="file" class="form-control"/>
+        <input asp-for="Img" type="file" class="form-control" />
         <span asp-validation-for="Img" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="File"></label>
-        <input asp-for="File" type="file" class="form-control"/>
+        <input asp-for="File" type="file" class="form-control" />
         <span asp-validation-for="File" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="Pages"></label>
-        <input asp-for="Pages" class="form-control"/>
+        <input asp-for="Pages" class="form-control" />
         <span asp-validation-for="Pages" class="text-danger"></span>
     </div>
 
@@ -51,5 +51,6 @@
     </div>
     <hr />
     <input type="submit" class="btn btn-primary" value="Create" />
+    <a href="/Admin/Books/All" class="btn btn-secondary ">Cancel</a>
 </form>
 

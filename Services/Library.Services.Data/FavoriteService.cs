@@ -20,14 +20,6 @@
 
         public async Task AddToFavoriteAsync(string userId, int bookId)
         {
-            //var isAdded = this.favoriteRepository.All()
-            //    .Any(f => f.UserId == userId && f.BookId == bookId);
-
-            //if (isAdded)
-            //{
-            //    throw new ArgumentException("This book is added to favorite");
-            //}
-
             var favorite = new Favorite
             {
                 UserId = userId,

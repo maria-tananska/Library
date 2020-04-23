@@ -10,12 +10,14 @@
         <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div >
-        <label asp-for="Img" ></label>
+    <div>
+        <label asp-for="Img"></label>
         <input asp-for="Img" type="file" class="form-control" />
         <span asp-validation-for="Img" class="text-danger"></span>
     </div>
     <hr />
     <input type="submit" class="btn btn-primary" value="Create" />
+    <a href="/Admin/Categories/All" class="btn btn-secondary ">Cancel</a>
 </form>
+
 

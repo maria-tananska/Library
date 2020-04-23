@@ -1,4 +1,4 @@
-﻿namespace Library.Web.ViewModels.Favorite
+﻿namespace Library.Web.ViewModels.Books
 {
     using System.Collections.Generic;
 

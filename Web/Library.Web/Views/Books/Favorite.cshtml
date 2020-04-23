@@ -1,13 +1,13 @@
-﻿@model Library.Web.ViewModels.Favorite.AllFavoriteBooksViewModel
+﻿@model Library.Web.ViewModels.Books.AllFavoriteBooksViewModel
 @{
     ViewData["Title"] = "My books";
 }
 
-<h1 class="text-center">My books</h1>
-<div class="books">
+<h1 class="text-center mb-4">My books</h1>
+<div class="row">
     @foreach (var book in Model.FavouriteBook)
     {
-        <div class="single-book">
+        <div class="single-book col-md-auto">
             <a href="/Books/Detail/@book.BookId" class="single-book__img">
                 <img src="@book.BookImgUrl" width="100" alt="@book.BookTitle image">
             </a>
