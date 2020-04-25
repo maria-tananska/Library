@@ -66,11 +66,20 @@
             return this.RedirectToAction("Authors");
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
+        {
+            var model = this.authorService.GetById<DeleteModel>(id);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Route("/Admin/Author/Delete/{id}")]
+        public async Task<IActionResult> DeleteModel(int id)
         {
             await this.authorService.DeleteByIdAsync(id);
 
-            return this.RedirectToAction("Authors");
+            return this.RedirectToAction(nameof(this.Authors));
         }
     }
 }

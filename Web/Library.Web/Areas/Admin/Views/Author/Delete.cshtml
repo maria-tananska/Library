@@ -1,0 +1,16 @@
+﻿@model Library.Web.ViewModels.Admin.Author.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<form method="post" asp-action="Delete" asp-controller="Author">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <hr />
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    <a href="/Admin/Author/Authors" class="btn btn-secondary ">Cancel</a>
+</form>
+

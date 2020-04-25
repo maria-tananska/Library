@@ -3,7 +3,6 @@
     ViewData["Title"] = "Edit category";
 }
 
-<h1>ViewData["Title"]</h1>
 <h1>@ViewData["Title"]</h1>
 <form asp-action="Edit" asp-controller="Categories" method="post" enctype="multipart/form-data">
     <div>
@@ -18,5 +17,6 @@
     </div>
     <hr />
     <input type="submit" class="btn btn-primary" value="Save" />
+    <a href="/Admin/Categories/All" class="btn btn-secondary ">Cancel</a>
 </form>
 

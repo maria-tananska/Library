@@ -135,7 +135,17 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var model = this.bookService.GetByIdTo<DeleteModel>(id);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Route("/Admin/Books/Delete/{id}")]
+        public async Task<IActionResult> DeletePost(int id)
         {
             await this.bookService.DeleteAsync(id);
 

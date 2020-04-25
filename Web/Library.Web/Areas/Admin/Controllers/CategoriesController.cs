@@ -53,7 +53,16 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
+        {
+            var model = this.categoryService.GetById<DeleteModel>(id);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Route("/Admin/Categories/Delete/{id}")]
+        public async Task<IActionResult> DeletePost(int id)
         {
             await this.categoryService.DeleteByIdAsync(id);
 

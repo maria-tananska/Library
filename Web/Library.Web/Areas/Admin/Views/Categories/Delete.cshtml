@@ -1,0 +1,16 @@
+﻿@model Library.Web.ViewModels.Admin.Categories.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+<form method="post" asp-action="Delete" asp-controller="Categories">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <hr />
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    <a href="/Admin/Categories/All" class="btn btn-secondary ">Cancel</a>
+</form>
+
